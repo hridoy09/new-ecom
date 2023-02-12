@@ -12,10 +12,10 @@
 	<!--header-->
 @include('frontend.partials.header')
 
-	<main id="main"  class="main-site left-sidebar">
+
 @yield('content')
 
-	</main>
+
 
 @include('frontend.partials.footer')
 

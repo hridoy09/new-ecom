@@ -9,4 +9,14 @@ class product extends Model
 {
     use HasFactory;
     protected $guarded=[];
+
+    /**
+     * Get the user that owns the product
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function stock()
+    {
+        return $this->belongsTo(stock::class, 'id', 'product_name');
+    }
 }

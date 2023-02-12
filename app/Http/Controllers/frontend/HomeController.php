@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\product;
 use App\Models\Subcategory;
+use App\Models\wishlist;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Catch_;
@@ -44,6 +45,12 @@ $products=Product::where('subcategory_id','=',$id)->paginate('15');
         return view('frontend.shop', compact('products'));
     }
 
+    public function details($id){
+        $product=Product::with('stock')->findOrFail($id);
+
+        return view('frontend.detail', compact('product'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -74,6 +81,22 @@ $products=Product::where('subcategory_id','=',$id)->paginate('15');
     public function show($id)
     {
         //
+    }
+
+
+    public function wishlist( $id){
+        $product=product::findOrFail($id);
+        $wishlist =wishlist::where('product_id', $id)->first();
+       if(isset($wishlist)){
+        return "Allready Exits";
+       }
+
+        wishlist::insert([
+
+            'product_id'=>$product->id,
+        ]);
+return back();
+
     }
 
     /**

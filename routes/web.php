@@ -39,6 +39,8 @@ Route::get('dashboard', [AdminController::class, 'index']);
 Route::name('user.')->prefix('user/')->group(function(){
     Route::get('home', [HomeController::class, 'index']);
     Route::get('shop/{id}',[HomeController::class, 'shop'])->name('shop');
+    Route::get('details/{id}',[HomeController::class, 'details'])->name('details');
+    Route::get('wishlist/{id}',[HomeController::class, 'wishlist'])->name('wishlist');
 
 });
 

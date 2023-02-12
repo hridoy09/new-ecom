@@ -3,7 +3,7 @@
 @section('content')
 	<!--main area-->
 
-
+    <main id="main"  class="left-sidebar">
 		<div class="container">
 
 			<div class="wrap-breadcrumb">
@@ -71,12 +71,12 @@
 							<li class="col-lg-4 col-md-6 col-sm-6 col-xs-6 ">
 								<div class="product product-style-3 equal-elem ">
 									<div class="product-thumnail">
-										<a href="detail.html" title="T-Shirt Raw Hem Organic Boro Constrast Denim">
+										<a href="{{ route('user.details',$product->id) }}" title="T-Shirt Raw Hem Organic Boro Constrast Denim">
 											<figure><img src="{{ asset('') }}{{$product->image  }}" alt="T-Shirt Raw Hem Organic Boro Constrast Denim"></figure>
 										</a>
 									</div>
 									<div class="product-info">
-										<a href="#" class="product-name"><span>{{ $product->title }}</span></a>
+										<a href="{{ route('user.details',$product->id) }}" class="product-name"><span>{{ $product->title }}</span></a>
 										<div class="wrap-price"><span class="product-price">{{$product->price  }}</span></div>
 										<a href="#" class="btn add-to-cart">Add To Cart</a>
 									</div>
@@ -257,7 +257,7 @@
 
 		</div><!--end container-->
 
-
+    </main>
 	<!--main area-->
 
 @endsection

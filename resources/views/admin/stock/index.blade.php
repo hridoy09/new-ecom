@@ -2,7 +2,7 @@
 @extends('admin.layouts.app')
 @section('content')
 
-
+<main id="main"  class="main-site">
                 <div class="page-content">
                     <div class="container-fluid">
                          <!-- start page title -->
@@ -81,7 +81,7 @@
                     <!-- container-fluid -->
                 </div>
                 <!-- End Page-content -->
-
+</main>
  @endsection
 
 
