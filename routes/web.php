@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\StockController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\frontend\HomeController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,12 +37,27 @@ Route::get('dashboard', [AdminController::class, 'index']);
 
 });
 
+
 Route::name('user.')->prefix('user/')->group(function(){
-    Route::get('home', [HomeController::class, 'index']);
+Route::get('home', [HomeController::class, 'index']);
     Route::get('shop/{id}',[HomeController::class, 'shop'])->name('shop');
     Route::get('details/{id}',[HomeController::class, 'details'])->name('details');
+});
+
+
+
+Route::middleware('auth:web')->name('user.')->prefix('user/')->group(function(){
+
     Route::get('wishlist/{id}',[HomeController::class, 'wishlist'])->name('wishlist');
+    Route::get('show-wishlist',[HomeController::class, 'showWishlist'])->name('showwishlist');
+    Route::get('delete-wishlist/{id}',[HomeController::class, 'wishDestroy'])->name('wishdelete');
 
 });
+
+
+
+
+Auth::routes();
+
 
 

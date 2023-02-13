@@ -9,6 +9,7 @@ use App\Models\Subcategory;
 use App\Models\wishlist;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use PhpParser\Node\Stmt\Catch_;
 
 class HomeController extends Controller
@@ -51,40 +52,12 @@ $products=Product::where('subcategory_id','=',$id)->paginate('15');
         return view('frontend.detail', compact('product'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
 
-    public function wishlist( $id){
+    public function wishlist(Request $request, $id){
+        $user_id = Auth::user()->id;
+
+
         $product=product::findOrFail($id);
         $wishlist =wishlist::where('product_id', $id)->first();
        if(isset($wishlist)){
@@ -93,43 +66,28 @@ $products=Product::where('subcategory_id','=',$id)->paginate('15');
 
         wishlist::insert([
 
+            'user_id'=>$user_id,
             'product_id'=>$product->id,
         ]);
 return back();
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+
+    public function showWishlist(){
+        $session_id=Auth::user()->id;
+
+        $wishlists=wishlist::where('user_id',$session_id)->with('wishProduct')->paginate('15');
+        // dd($wishlists);
+        return view('frontend.wishlist', compact('wishlists'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+    public function wishDestroy($id){
+        $wish = wishlist::findOrFail($id);
+        $wish->delete();
+
+        return back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+
 }
