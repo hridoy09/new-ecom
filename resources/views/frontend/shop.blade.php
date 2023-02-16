@@ -78,7 +78,7 @@
 									<div class="product-info">
 										<a href="{{ route('user.details',$product->id) }}" class="product-name"><span>{{ $product->title }}</span></a>
 										<div class="wrap-price"><span class="product-price">{{$product->price  }}</span></div>
-										<a href="#" class="btn add-to-cart">Add To Cart</a>
+										<a href="{{ route('user.add.to.cart', $product->id) }}" class="btn add-to-cart">Add To Cart</a>
 									</div>
 								</div>
 							</li>

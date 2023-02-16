@@ -51,6 +51,9 @@ Route::middleware('auth:web')->name('user.')->prefix('user/')->group(function(){
     Route::get('wishlist/{id}',[HomeController::class, 'wishlist'])->name('wishlist');
     Route::get('show-wishlist',[HomeController::class, 'showWishlist'])->name('showwishlist');
     Route::get('delete-wishlist/{id}',[HomeController::class, 'wishDestroy'])->name('wishdelete');
+    Route::get('add-to-cart/{id}', [HomeController::class, 'addToCart'])->name('add.to.cart');
+    Route::get('cart', [HomeController::class, 'cart'])->name('cart');
+    Route::get('remove-from-cart/{id}', [HomeController::class, 'remove'])->name('remove.from.cart');
 
 });
 
