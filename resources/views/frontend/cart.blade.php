@@ -20,7 +20,7 @@
                         @php $total = 0 @endphp
                         @if(session('cart'))
                             @foreach(session('cart') as $id => $details)
-                                @php $total += $details['price'] * $details['quantity'] @endphp
+                                @php $total = $details['price'] * $details['quantity'] @endphp
 						<li class="pr-cart-item">
 							<div class="product-image">
 								<figure><img src="{{ asset('') }}{{ $details['image'] }}" alt=""></figure>
@@ -30,10 +30,15 @@
 							</div>
 							<div class="price-field produtc-price"><p class="price"> ${{ $details['price'] }}</p></div>
 							<div class="quantity">
-								<div class="quantity-input">
-									<input type="text" name="product-quatity" value="{{ $details['quantity'] }}" data-max="120" pattern="[0-9]*" >
-									<a class="btn btn-increase" href="#"></a>
-									<a class="btn btn-reduce" href="#"></a>
+								<div >
+                                    <form action="{{ route('user.update.cart',$id) }}" method="POST">
+                                        @csrf
+                                            <input type="text" class="form-control" name="quantity" value="{{ $details['quantity'] }}" data-max="120" pattern="[0-9]*" >
+                                            <button class="btn btn-warning " type="submit">Update</button>
+
+                                    </form>
+
+
 								</div>
 							</div>
 							<div class="price-field sub-total"><p class="price"> ${{ $details['price'] * $details['quantity'] }}</p></div>
@@ -63,10 +68,6 @@
 						</label>
 						<a class="btn btn-checkout" href="checkout.html">Check out</a>
 						<a class="link-to-shop" href="shop.html">Continue Shopping<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
-					</div>
-					<div class="update-clear">
-						<a class="btn btn-clear" href="#">Clear Shopping Cart</a>
-						<a class="btn btn-update" href="#">Update Shopping Cart</a>
 					</div>
 				</div>
 

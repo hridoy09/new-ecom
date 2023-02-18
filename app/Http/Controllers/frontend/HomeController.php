@@ -131,4 +131,19 @@ return back();
         return back();
     }
 
+
+    public function update(Request $request)
+    {
+        // dd($request->all());
+
+        if($request->id && $request->quantity){
+
+            $cart = session()->get('cart');
+            $cart[$request->id]["quantity"] = $request->quantity;
+            // dd($cart);
+            session()->put('cart', $cart);
+            session()->flash('success', 'Cart updated successfully');
+        }
+        return back();
+    }
 }

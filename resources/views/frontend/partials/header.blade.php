@@ -93,9 +93,9 @@
                         </div>
                         <div class="wrap-icon-section minicart">
                             @php $total = 0 @endphp
-                            @foreach((array) session('cart') as $id => $details)
+                            {{-- @foreach((array) session('cart') as $id => $details)
                                 @php $total += $details['price'] * $details['quantity'] @endphp
-                            @endforeach
+                            @endforeach --}}
                             <a href="{{ route('user.cart') }}" class="link-direction">
                                 <i class="fa fa-shopping-basket" aria-hidden="true"></i>
                                 <div class="left-info">
